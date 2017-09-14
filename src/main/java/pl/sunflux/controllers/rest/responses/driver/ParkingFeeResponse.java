@@ -14,16 +14,8 @@ public class ParkingFeeResponse {
     @JsonProperty(value = "currency")
     private Currency currency;
 
-    public BigDecimal getParkingFee() {
-        return parkingFee;
-    }
-
     public void setParkingFee(BigDecimal parkingFee) {
         this.parkingFee = parkingFee;
-    }
-
-    public Currency getCurrency() {
-        return currency;
     }
 
     public void setCurrency(Currency currency) {

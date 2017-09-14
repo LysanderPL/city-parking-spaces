@@ -11,4 +11,5 @@ import pl.sunflux.entity.Vehicle;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     public Vehicle findBySerialNumberAndDriver(String serialNumber, Driver driver);
+    public Vehicle findBySerialNumber(String serialNumber);
 }

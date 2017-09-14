@@ -116,6 +116,10 @@ public class DriverController {
         parkingMeterUsage.setDateEnd(dateEnd.toDate());
         parkingMeterUsageRepository.save(parkingMeterUsage);
 
+        ParkingMeter parkingMeter = parkingMeterUsage.getParkingMeter();
+        parkingMeter.setFree(true);
+        parkingMeterRepository.save(parkingMeter);
+
         stopParkingResponse.setParkingStopped(true);
         return new ResponseEntity<>(stopParkingResponse, HttpStatus.OK);
     }

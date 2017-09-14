@@ -11,4 +11,5 @@ import pl.sunflux.entity.Vehicle;
 @Repository
 public interface ParkingMeterUsageRepository extends JpaRepository<ParkingMeterUsage, Long> {
     public ParkingMeterUsage findByIdAndVehicle(Long id, Vehicle vehicle);
+    public ParkingMeterUsage findFirstByVehicleOrderByIdDesc(Vehicle vehicle);
 }

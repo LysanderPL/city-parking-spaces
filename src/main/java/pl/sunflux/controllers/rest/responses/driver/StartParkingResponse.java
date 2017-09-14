@@ -19,32 +19,16 @@ public class StartParkingResponse {
     @JsonProperty(value = "date_start")
     private String dateStart;
 
-    public Long getParkingTicketId() {
-        return parkingTicketId;
-    }
-
     public void setParkingTicketId(Long parkingTicketId) {
         this.parkingTicketId = parkingTicketId;
-    }
-
-    public DriverTypeEnum getDriverType() {
-        return driverType;
     }
 
     public void setDriverType(DriverTypeEnum driverType) {
         this.driverType = driverType;
     }
 
-    public String getDateStart() {
-        return dateStart;
-    }
-
     public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
-    }
-
-    public Boolean getParkingStarted() {
-        return isParkingStarted;
     }
 
     public void setParkingStarted(Boolean parkingStarted) {

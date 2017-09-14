@@ -9,10 +9,6 @@ public class StopParkingResponse {
     @JsonProperty(value = "is_parking_stopped")
     private Boolean isParkingStopped = false;
 
-    public Boolean getParkingStopped() {
-        return isParkingStopped;
-    }
-
     public void setParkingStopped(Boolean parkingStopped) {
         isParkingStopped = parkingStopped;
     }
