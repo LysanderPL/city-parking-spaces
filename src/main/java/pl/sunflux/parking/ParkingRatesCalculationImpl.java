@@ -2,7 +2,7 @@ package pl.sunflux.parking;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.sunflux.entity.ParkingMeterUsage;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Created by maciej on 14.09.17.
  */
-@Service
+@Component
 public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInterface {
     @Override
     public BigDecimal calculateParkingFee(ParkingMeterUsage parkingMeterUsage) throws NoCalculationException {
