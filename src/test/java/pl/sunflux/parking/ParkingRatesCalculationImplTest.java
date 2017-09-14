@@ -1,5 +1,6 @@
 package pl.sunflux.parking;
 
+import org.junit.Before;
 import org.junit.Test;
 import pl.sunflux.entity.*;
 import pl.sunflux.entity.constants.DriverTypeEnum;
@@ -19,56 +20,49 @@ import static org.junit.Assert.assertEquals;
  */
 public class ParkingRatesCalculationImplTest {
 
-    @Test
-    public void testCalculationForVip() throws ParseException, NoCalculationException {
+    private ParkingMeterUsage parkingMeterUsage = new ParkingMeterUsage();
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    @Before
+    public void prepareData() {
         Currency currency = new Currency();
         currency.setCurrencyCourseToPLN(new BigDecimal(1));
 
         Driver driver = new Driver();
-        driver.setDriverTypeEnum(DriverTypeEnum.VIP);
 
         Vehicle vehicle = new Vehicle();
         vehicle.setDriver(driver);
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        ParkingMeterUsage parkingMeterUsage = new ParkingMeterUsage();
         parkingMeterUsage.setCurrency(currency);
-        parkingMeterUsage.setDateStart(df.parse("2017-09-14 13:00:00"));
-        parkingMeterUsage.setDateEnd(df.parse("2017-09-14 14:00:00"));
         parkingMeterUsage.setParkingMeter(new ParkingMeter());
         parkingMeterUsage.setVehicle(vehicle);
+    }
 
+    @Test
+    public void testCalculationForVip() throws ParseException, NoCalculationException {
         ParkingRatesCalculationInterface parkingRatesCalculation = new ParkingRatesCalculationImpl();
-        BigDecimal result = parkingRatesCalculation.calculateParkingFee(parkingMeterUsage);
+        parkingMeterUsage.getVehicle().getDriver().setDriverTypeEnum(DriverTypeEnum.VIP);
 
-        assertEquals(new BigDecimal(0), result);
+        String[] dateStart = new String[]{"2017-09-14 13:00:00", "2017-09-14 13:30:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00"};
+        String[] dateEnd = new String[]{"2017-09-14 14:00:00", "2017-09-14 14:00:00", "2017-09-14 15:00:00", "2017-09-14 16:00:00", "2017-09-14 17:00:00", "2017-09-14 18:00:00", "2017-09-14 19:00:00"};
+        Double[] expectedResult = new Double[]{0.0, 0.0, 2.0, 5.0, 9.5, 16.25, 26.375};
+
+        makeAssertions(parkingRatesCalculation, dateStart, dateEnd, expectedResult);
     }
 
     @Test
     public void testCalculationForRegular() throws ParseException, NoCalculationException {
-        Currency currency = new Currency();
-        currency.setCurrencyCourseToPLN(new BigDecimal(1));
-
-        Driver driver = new Driver();
-        driver.setDriverTypeEnum(DriverTypeEnum.REGULAR);
-
-        Vehicle vehicle = new Vehicle();
-        vehicle.setDriver(driver);
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        ParkingMeterUsage parkingMeterUsage = new ParkingMeterUsage();
-        parkingMeterUsage.setCurrency(currency);
-        parkingMeterUsage.setParkingMeter(new ParkingMeter());
-        parkingMeterUsage.setVehicle(vehicle);
-
         ParkingRatesCalculationInterface parkingRatesCalculation = new ParkingRatesCalculationImpl();
+        parkingMeterUsage.getVehicle().getDriver().setDriverTypeEnum(DriverTypeEnum.REGULAR);
 
-        String[] dateStart = new String[]{"2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00"};
-        String[] dateEnd = new String[]{"2017-09-14 14:00:00", "2017-09-14 15:00:00", "2017-09-14 16:00:00", "2017-09-14 17:00:00", "2017-09-14 18:00:00", "2017-09-14 19:00:00"};
-        Integer[] expectedResult = new Integer[]{1, 3, 7, 15, 31, 63};
+        String[] dateStart = new String[]{"2017-09-14 13:00:00", "2017-09-14 13:30:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00", "2017-09-14 13:00:00"};
+        String[] dateEnd = new String[]{"2017-09-14 14:00:00", "2017-09-14 14:00:00", "2017-09-14 15:00:00", "2017-09-14 16:00:00", "2017-09-14 17:00:00", "2017-09-14 18:00:00", "2017-09-14 19:00:00"};
+        Double[] expectedResult = new Double[]{1.0, 1.0, 3.0, 7.0, 15.0, 31.0, 63.0};
 
+        makeAssertions(parkingRatesCalculation, dateStart, dateEnd, expectedResult);
+    }
+
+    private void makeAssertions(ParkingRatesCalculationInterface parkingRatesCalculation, String[] dateStart, String[] dateEnd, Double[] expectedResult) throws ParseException, NoCalculationException {
         for (int i = 0; i < dateEnd.length; i++) {
             parkingMeterUsage.setDateStart(df.parse(dateStart[i]));
             parkingMeterUsage.setDateEnd(df.parse(dateEnd[i]));

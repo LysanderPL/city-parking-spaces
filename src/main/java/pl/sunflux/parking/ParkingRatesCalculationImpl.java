@@ -17,13 +17,24 @@ public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInter
         BigDecimal sum = new BigDecimal(0);
         Period period = new Period(new DateTime(parkingMeterUsage.getDateStart()), new DateTime(parkingMeterUsage.getDateEnd()));
         Integer hours = period.getHours();
+        if (period.getMinutes() > 0) {
+            hours++;
+        }
 
         Integer counter = 0;
         BigDecimal last = new BigDecimal(1);
 
         switch (parkingMeterUsage.getVehicle().getDriver().getDriverTypeEnum()) {
             case VIP:
-                return new BigDecimal(0);
+                while (counter < hours) {
+                    if (counter < 1) {
+                    } else if (counter < 2) {
+                        sum = sum.add(last = new BigDecimal(2));
+                    } else if (counter.compareTo(3) <= 1) {
+                        sum = sum.add(last = new BigDecimal(last.doubleValue() * 1.5));
+                    }
+                    counter++;
+                }
             case REGULAR:
                 while (counter < hours) {
                     if (counter < 1) {
