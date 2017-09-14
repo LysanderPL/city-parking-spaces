@@ -46,6 +46,6 @@ public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInter
                 }
         }
 
-        return sum;
+        return new BigDecimal(sum.doubleValue() * parkingMeterUsage.getCurrency().getCurrencyCourseToPLN().doubleValue());
     }
 }
