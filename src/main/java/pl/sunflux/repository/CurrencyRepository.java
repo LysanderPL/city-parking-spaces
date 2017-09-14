@@ -10,4 +10,5 @@ import pl.sunflux.entity.Currency;
  */
 @Repository
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
+    public Currency findByCurrencyCode(String currencyCode);
 }
