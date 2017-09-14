@@ -14,6 +14,10 @@ import java.math.BigDecimal;
 public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInterface {
     @Override
     public BigDecimal calculateParkingFee(ParkingMeterUsage parkingMeterUsage) throws NoCalculationException {
+        if (parkingMeterUsage == null || parkingMeterUsage.getDateStart() == null || parkingMeterUsage.getDateEnd() == null) {
+            throw new NoCalculationException();
+        }
+
         BigDecimal sum = new BigDecimal(0);
         Period period = new Period(new DateTime(parkingMeterUsage.getDateStart()), new DateTime(parkingMeterUsage.getDateEnd()));
         Integer hours = period.getHours();

@@ -72,8 +72,9 @@ public class ParkingRatesCalculationImplTest {
     }
 
     @Test(expected = NoCalculationException.class)
-    public void testNoCalculationException() {
-
+    public void testNoCalculationException() throws NoCalculationException {
+        ParkingRatesCalculationInterface parkingRatesCalculation = new ParkingRatesCalculationImpl();
+        parkingRatesCalculation.calculateParkingFee(null);
     }
 
 
