@@ -36,6 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/driver/**").permitAll()
                 .antMatchers("/parking-operator/**").hasAnyRole("OPERATOR", "OWNER")
                 .antMatchers("/parking-owner/**").hasRole("OWNER")
                 .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())

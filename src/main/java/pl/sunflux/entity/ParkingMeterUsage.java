@@ -18,6 +18,9 @@ public class ParkingMeterUsage {
     @ManyToOne
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
+    @ManyToOne
+    @JoinColumn(name = "currency_id", nullable = false)
+    private Currency currency;
     @Column(name = "date_start", nullable = false)
     private Date dateStart;
     @Column(name = "date_end", nullable = true)
@@ -61,5 +64,13 @@ public class ParkingMeterUsage {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }
