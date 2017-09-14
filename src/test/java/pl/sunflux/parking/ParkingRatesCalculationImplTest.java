@@ -18,13 +18,33 @@ import static org.junit.Assert.assertEquals;
 public class ParkingRatesCalculationImplTest {
 
     @Test
-    public void testCalculationForVip() {
+    public void testCalculationForVip() throws ParseException, NoCalculationException {
+        Currency currency = new Currency();
+        currency.setCurrencyCourseToPLN(new BigDecimal(1));
 
-//        assertEquals();
+        Driver driver = new Driver();
+        driver.setDriverTypeEnum(DriverTypeEnum.VIP);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setDriver(driver);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        ParkingMeterUsage parkingMeterUsage = new ParkingMeterUsage();
+        parkingMeterUsage.setCurrency(currency);
+        parkingMeterUsage.setDateStart(df.parse("2017-09-14 13:00:00"));
+        parkingMeterUsage.setDateEnd(df.parse("2017-09-14 14:00:00"));
+        parkingMeterUsage.setParkingMeter(new ParkingMeter());
+        parkingMeterUsage.setVehicle(vehicle);
+
+        ParkingRatesCalculationInterface parkingRatesCalculation = new ParkingRatesCalculationImpl();
+        BigDecimal result = parkingRatesCalculation.calculateParkingFee(parkingMeterUsage);
+
+        assertEquals(new BigDecimal(0), result);
     }
 
     @Test
-    public void testCalculationForRegular() throws ParseException {
+    public void testCalculationForRegular() throws ParseException, NoCalculationException {
         Currency currency = new Currency();
         currency.setCurrencyCourseToPLN(new BigDecimal(1));
 

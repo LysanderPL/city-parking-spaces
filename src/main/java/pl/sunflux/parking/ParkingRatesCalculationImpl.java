@@ -13,6 +13,12 @@ public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInter
     @Override
     public BigDecimal calculateParkingFee(ParkingMeterUsage parkingMeterUsage) throws NoCalculationException {
 
+        switch (parkingMeterUsage.getVehicle().getDriver().getDriverTypeEnum()) {
+            case VIP:
+                return new BigDecimal(0);
+            case REGULAR:
+                return new BigDecimal(1);
+        }
 
         return null;
     }
