@@ -66,7 +66,7 @@ public class DriverController {
         parkingMeter.setFree(false);
         parkingMeterRepository.save(parkingMeter);
 
-        Driver driver = driverRepository.findByDriverPesel(startParkingContainer.getPesel());
+        Driver driver = driverRepository.findByPesel(startParkingContainer.getPesel());
         if (driver == null) {
             driver = new Driver();
             driver.setPesel(startParkingContainer.getPesel());
@@ -102,7 +102,7 @@ public class DriverController {
 
     @RequestMapping(value = "stop-parking", produces = "application/json", method = RequestMethod.POST)
     public ResponseEntity<StopParkingResponse> stopParking(@RequestBody StopParkingContainer stopParkingContainer) {
-        Driver driver = driverRepository.findByDriverPesel(stopParkingContainer.getPesel());
+        Driver driver = driverRepository.findByPesel(stopParkingContainer.getPesel());
         Vehicle vehicle = vehicleRepository.findBySerialNumberAndDriver(stopParkingContainer.getVehicleSerialNumber(), driver);
         ParkingMeterUsage parkingMeterUsage = parkingMeterUsageRepository.findByIdAndVehicle(stopParkingContainer.getParkingTicketId(), vehicle);
 

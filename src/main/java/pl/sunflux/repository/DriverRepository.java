@@ -9,5 +9,5 @@ import pl.sunflux.entity.Driver;
  */
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
-    public Driver findByDriverPesel(String pesel);
+    public Driver findByPesel(String pesel);
 }
