@@ -42,10 +42,10 @@ public class ParkingStartImpl implements ParkingStartInterface {
         parkingMeter.setFree(false);
         parkingMeterRepository.save(parkingMeter);
 
-        Driver driver = driverRepository.findByPesel(startParkingContainer.getPesel());
+        Driver driver = driverRepository.findByDriverIdCard(startParkingContainer.getDriverIdCrd());
         if (driver == null) {
             driver = new Driver();
-            driver.setPesel(startParkingContainer.getPesel());
+            driver.setDriverIdCard(startParkingContainer.getDriverIdCrd());
             driver.setDriverTypeEnum(DriverTypeEnum.REGULAR);
             driverRepository.save(driver);
         }

@@ -3,19 +3,21 @@ package pl.sunflux.controllers.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 import pl.sunflux.controllers.rest.containers.driver.ParkingFeeContainer;
 import pl.sunflux.controllers.rest.containers.driver.StartParkingContainer;
 import pl.sunflux.controllers.rest.containers.driver.StopParkingContainer;
+import pl.sunflux.controllers.rest.responses.ValidationError;
+import pl.sunflux.controllers.rest.responses.ValidationErrorBuilder;
 import pl.sunflux.controllers.rest.responses.driver.ParkingFeeResponse;
 import pl.sunflux.controllers.rest.responses.driver.StartParkingResponse;
 import pl.sunflux.controllers.rest.responses.driver.StopParkingResponse;
 import pl.sunflux.parking.ParkingFeeInterface;
 import pl.sunflux.parking.ParkingStartInterface;
 import pl.sunflux.parking.ParkingStopInterface;
+
+import javax.validation.Valid;
 
 /**
  * Created by maciej on 14.09.17.
@@ -36,17 +38,27 @@ public class DriverController {
     }
 
     @RequestMapping(value = "start-parking", produces = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<StartParkingResponse> startParking(@RequestBody StartParkingContainer startParkingContainer) {
+    public ResponseEntity<StartParkingResponse> startParking(@Valid @RequestBody StartParkingContainer startParkingContainer) {
         return new ResponseEntity<>(parkingStartInterface.prepareResponse(startParkingContainer), HttpStatus.OK);
     }
 
     @RequestMapping(value = "stop-parking", produces = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<StopParkingResponse> stopParking(@RequestBody StopParkingContainer stopParkingContainer) {
+    public ResponseEntity<StopParkingResponse> stopParking(@Valid @RequestBody StopParkingContainer stopParkingContainer) {
         return new ResponseEntity<>(parkingStopInterface.prepareResponse(stopParkingContainer), HttpStatus.OK);
     }
 
     @RequestMapping(value = "parking-fee", produces = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<ParkingFeeResponse> parkingFee(@RequestBody ParkingFeeContainer parkingFeeContainer) {
+    public ResponseEntity<ParkingFeeResponse> parkingFee(@Valid @RequestBody ParkingFeeContainer parkingFeeContainer) {
         return new ResponseEntity<>(parkingFeeInterface.prepareResponse(parkingFeeContainer), HttpStatus.OK);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ValidationError handleException(MethodArgumentNotValidException exception) {
+        return createValidationError(exception);
+    }
+
+    private ValidationError createValidationError(MethodArgumentNotValidException e) {
+        return ValidationErrorBuilder.fromBindingErrors(e.getBindingResult());
     }
 }

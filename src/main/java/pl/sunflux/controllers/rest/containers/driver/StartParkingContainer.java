@@ -1,6 +1,7 @@
 package pl.sunflux.controllers.rest.containers.driver;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,20 +10,22 @@ import javax.validation.constraints.NotNull;
  */
 public class StartParkingContainer {
 
-    @JsonProperty(value = "pesel", required = true)
-    @NotNull
-    private String pesel;
+    @JsonProperty(value = "driver_id_card", required = true)
+    @NotBlank(message = "Driver ID card must not be blank!")
+    private String driverIdCrd;
 
     @JsonProperty(value = "vehicle_serial_number", required = true)
-    @NotNull
+    @NotBlank(message = "Vehicle serial must not be blank!")
     private String vehicleSerialNumber;
 
     @JsonProperty(value = "parking_meter_serial_number", required = true)
-    @NotNull
+    @NotBlank(message = "Parking meter serial must not be blank!")
     private String parkingMeterSerialNumber;
 
-    public String getPesel() {
-        return pesel;
+//    private String currencyCode;
+
+    public String getDriverIdCrd() {
+        return driverIdCrd;
     }
 
     public String getVehicleSerialNumber() {

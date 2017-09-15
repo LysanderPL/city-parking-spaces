@@ -13,8 +13,8 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "pesel", unique = true, nullable = false)
-    private String pesel;
+    @Column(name = "driver_id_card", unique = true, nullable = false)
+    private String driverIdCard;
     @Column(name = "driver_type", nullable = false)
     private DriverTypeEnum driverTypeEnum = DriverTypeEnum.REGULAR;
 
@@ -26,12 +26,12 @@ public class Driver {
         this.id = id;
     }
 
-    public String getPesel() {
-        return pesel;
+    public String getDriverIdCard() {
+        return driverIdCard;
     }
 
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
+    public void setDriverIdCard(String driverIdCard) {
+        this.driverIdCard = driverIdCard;
     }
 
     public DriverTypeEnum getDriverTypeEnum() {

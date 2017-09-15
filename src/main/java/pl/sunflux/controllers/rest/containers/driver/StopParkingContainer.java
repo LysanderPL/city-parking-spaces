@@ -1,6 +1,7 @@
 package pl.sunflux.controllers.rest.containers.driver;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,16 +10,16 @@ import javax.validation.constraints.NotNull;
  */
 public class StopParkingContainer {
     @JsonProperty(value = "parking_ticket_id", required = true)
-    @NotNull
+    @NotBlank(message = "Parking ticket must not be blank!")
     private Long parkingTicketId;
 
     @JsonProperty(value = "vehicle_serial_number", required = true)
-    @NotNull
+    @NotBlank(message = "Vehicle serial must not be blank!")
     private String vehicleSerialNumber;
 
-    @JsonProperty(value = "pesel", required = true)
-    @NotNull
-    private String pesel;
+    @JsonProperty(value = "driver_id_card", required = true)
+    @NotBlank(message = "Driver ID card must not be blank!")
+    private String driverIdCard;
 
     public Long getParkingTicketId() {
         return parkingTicketId;
@@ -28,7 +29,7 @@ public class StopParkingContainer {
         return vehicleSerialNumber;
     }
 
-    public String getPesel() {
-        return pesel;
+    public String getDriverIdCard() {
+        return driverIdCard;
     }
 }

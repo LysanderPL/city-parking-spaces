@@ -31,9 +31,9 @@ public class ParkingStopImpl implements ParkingStopInterface {
 
     @Override
     public StopParkingResponse prepareResponse(StopParkingContainer stopParkingContainer) {
-        Driver driver = driverRepository.findByPesel(stopParkingContainer.getPesel());
+        Driver driver = driverRepository.findByDriverIdCard(stopParkingContainer.getDriverIdCard());
         Vehicle vehicle = vehicleRepository.findBySerialNumberAndDriver(stopParkingContainer.getVehicleSerialNumber(), driver);
-        ParkingMeterUsage parkingMeterUsage = parkingMeterUsageRepository.findByIdAndVehicle(stopParkingContainer.getParkingTicketId(), vehicle);
+        ParkingMeterUsage parkingMeterUsage = parkingMeterUsageRepository.findByIdAndVehicleAndDateEndIsNull(stopParkingContainer.getParkingTicketId(), vehicle);
 
         StopParkingResponse stopParkingResponse = new StopParkingResponse();
 
