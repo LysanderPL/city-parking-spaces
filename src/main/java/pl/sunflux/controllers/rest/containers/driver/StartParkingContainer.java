@@ -9,15 +9,15 @@ import javax.validation.constraints.NotNull;
  */
 public class StartParkingContainer {
 
-    @JsonProperty(value = "pesel")
+    @JsonProperty(value = "pesel", required = true)
     @NotNull
     private String pesel;
 
-    @JsonProperty(value = "vehicle_serial_number")
+    @JsonProperty(value = "vehicle_serial_number", required = true)
     @NotNull
     private String vehicleSerialNumber;
 
-    @JsonProperty(value = "parking_meter_serial_number")
+    @JsonProperty(value = "parking_meter_serial_number", required = true)
     @NotNull
     private String parkingMeterSerialNumber;
 

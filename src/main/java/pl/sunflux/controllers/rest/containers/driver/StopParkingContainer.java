@@ -8,15 +8,15 @@ import javax.validation.constraints.NotNull;
  * Created by maciej on 14.09.17.
  */
 public class StopParkingContainer {
-    @JsonProperty(value = "parking_ticket_id")
+    @JsonProperty(value = "parking_ticket_id", required = true)
     @NotNull
     private Long parkingTicketId;
 
-    @JsonProperty(value = "vehicle_serial_number")
+    @JsonProperty(value = "vehicle_serial_number", required = true)
     @NotNull
     private String vehicleSerialNumber;
 
-    @JsonProperty(value = "pesel")
+    @JsonProperty(value = "pesel", required = true)
     @NotNull
     private String pesel;
 
