@@ -4,9 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Table(name = "currency")
 @Entity
 public class Currency {

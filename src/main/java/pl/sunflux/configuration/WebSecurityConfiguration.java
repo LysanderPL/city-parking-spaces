@@ -12,9 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import pl.sunflux.configuration.security.CustomBasicAuthenticationEntryPoint;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {

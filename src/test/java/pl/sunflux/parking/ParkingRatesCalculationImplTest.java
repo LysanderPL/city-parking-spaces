@@ -15,9 +15,6 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by maciej on 14.09.17.
- */
 public class ParkingRatesCalculationImplTest {
 
     private ParkingMeterUsage parkingMeterUsage = new ParkingMeterUsage();

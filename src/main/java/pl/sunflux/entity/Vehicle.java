@@ -2,9 +2,6 @@ package pl.sunflux.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Table(name = "vehicle")
 @Entity
 public class Vehicle {

@@ -3,9 +3,6 @@ package pl.sunflux.controllers.rest.responses.driver;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.sunflux.entity.constants.DriverTypeEnum;
 
-/**
- * Created by maciej on 14.09.17.
- */
 public class StartParkingResponse {
     @JsonProperty(value = "parking_ticket_id")
     private Long parkingTicketId;

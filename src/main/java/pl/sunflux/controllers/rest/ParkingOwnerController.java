@@ -1,7 +1,6 @@
 package pl.sunflux.controllers.rest;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +12,8 @@ import pl.sunflux.repository.CurrencyRepository;
 import pl.sunflux.repository.ParkingFeeRepository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @RequestMapping(value = "parking-owner")
 @RestController
 public class ParkingOwnerController {

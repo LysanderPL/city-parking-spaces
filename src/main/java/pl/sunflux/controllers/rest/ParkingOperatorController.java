@@ -13,9 +13,6 @@ import pl.sunflux.entity.Vehicle;
 import pl.sunflux.repository.ParkingMeterUsageRepository;
 import pl.sunflux.repository.VehicleRepository;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @RequestMapping(value = "parking-operator")
 @RestController
 public class ParkingOperatorController {

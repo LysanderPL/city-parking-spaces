@@ -4,9 +4,6 @@ import pl.sunflux.entity.constants.DriverTypeEnum;
 
 import javax.persistence.*;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Table(name = "driver")
 @Entity
 public class Driver {

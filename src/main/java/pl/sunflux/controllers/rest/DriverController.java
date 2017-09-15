@@ -19,9 +19,6 @@ import pl.sunflux.parking.ParkingStopInterface;
 
 import javax.validation.Valid;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @RequestMapping(value = "driver")
 @RestController
 public class DriverController {

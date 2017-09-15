@@ -5,9 +5,6 @@ import pl.sunflux.entity.Currency;
 
 import java.math.BigDecimal;
 
-/**
- * Created by maciej on 14.09.17.
- */
 public class ParkingFeeResponse {
     @JsonProperty(value = "parking_fee")
     private BigDecimal parkingFee;

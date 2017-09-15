@@ -3,9 +3,6 @@ package pl.sunflux.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Table(name = "parking_meter_usage")
 @Entity
 public class ParkingMeterUsage {

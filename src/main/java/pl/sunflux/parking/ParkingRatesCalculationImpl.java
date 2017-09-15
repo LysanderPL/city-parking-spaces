@@ -7,9 +7,6 @@ import pl.sunflux.entity.ParkingMeterUsage;
 
 import java.math.BigDecimal;
 
-/**
- * Created by maciej on 14.09.17.
- */
 @Component
 public class ParkingRatesCalculationImpl implements ParkingRatesCalculationInterface {
     @Override
